@@ -1,6 +1,7 @@
 /*
-  Blank Simple Project.c
-  http://learn.parallax.com/propeller-c-tutorials 
+  Projecto1.c
+  Autores: Pablo Ortiz, Hugo Elvira, Edgar Ramirez, Pedro Garcia
+  
 */
 #include "simpletools.h"                      // Include simple tools
 #include "abdrive.h"                          // Include abdrive header
@@ -36,22 +37,33 @@ int main()                                    // Main function
 }
 
 void girarIzquierda(){
-  drive_speed(0,0);
-  pause(500);
-  drive_goto(-26,25); //gira a la izquierda 
-  pause(500);
-  drive_goto(5,5);
-  return;
+  if(v_adelante()>5&&consultarDerecha()==0){
+      return;
+  }
+  else{
+    drive_speed(0,0);
+    pause(500);
+    drive_goto(-24,24); //gira a la izquierda 
+    pause(500);
+    return;
+  }  
 }
 void girarDerecha(){
-  drive_goto(6,6); 
-  drive_speed(0,0);
-  pause(500);
-  drive_goto(26,-25); //giro a la derecha
-  pause(500);
-  // avanza hasta que se encuentra denuevo con una pared a la derecha
-  drive_goto(10,10);//avanza una pequeña distancia para evitar que detecte de nuevo un vacio en la derecha
-  return;  
+   for(int n = 1; n <= 80; n++){                // Count to hundred
+    drive_rampStep(20,20);                   // move not too fast
+    pause(10);                               // 50 ms between reps
+  } 
+  if(v_adelante()>5&&consultarDerecha()==0){
+      return;
+  }
+  else{ 
+    drive_speed(0,0);
+    pause(500);
+    drive_goto(24,-24); //giro a la derecha
+    pause(500);
+    // avanza hasta que se encuentra denuevo con una pared a la derecha
+    return;
+  }      
 }
 int v_adelante(){
   return ping_cm(8);
