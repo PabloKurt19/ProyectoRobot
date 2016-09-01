@@ -17,16 +17,16 @@ int main()                                    // Main function
   while(1)
   {
     // Add main loop code here.
-    while(v_adelante()>5&&consultarDerecha()==0){
+    while(v_adelante()>5&&consultarDerecha()==0){//pared a la derecha
       drive_rampStep(50,50);
     }
-    if(consultarDerecha()==1){
+    if(consultarDerecha()==1){//libre a la derecha
       girarDerecha();  
     }
-    if(consultarDerecha()==0&&consultarIzquierda()==1){
+    if(consultarDerecha()==0&&consultarIzquierda()==1){//LIBRE A LA IZQUIERDA
       girarIzquierda();
     }
-    if(consultarDerecha()==0&&consultarIzquierda()==0){
+    if(consultarDerecha()==0&&consultarIzquierda()==0){//camino cerrado
       girarDerecha();
       girarDerecha();
     }
@@ -49,14 +49,17 @@ void girarIzquierda(){
   }  
 }
 void girarDerecha(){
-   for(int n = 1; n <= 80; n++){                // Count to hundred
+   for(int n = 1; n <= 70; n++){                // Count to hundred
     drive_rampStep(20,20);                   // move not too fast
     pause(10);                               // 50 ms between reps
   } 
-  if(v_adelante()>5&&consultarDerecha()==0){
+  if(v_adelante()>5&&consultarDerecha()==0){//pared a la derechaS
       return;
   }
-  else{ 
+  else{
+    if(v_adelante()<15){
+      drive_rampStep(50,50);
+    } 
     drive_speed(0,0);
     pause(500);
     drive_goto(24,-24); //giro a la derecha
