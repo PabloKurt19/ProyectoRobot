@@ -64,6 +64,10 @@ void girarDerecha(){
     pause(500);
     drive_goto(24,-24); //giro a la derecha
     pause(500);
+    for(int n = 1; n <= 70; n++){                // Count to hundred
+    drive_rampStep(20,20);                   // move not too fast
+    pause(10);                               // 50 ms between reps
+  } 
     // avanza hasta que se encuentra denuevo con una pared a la derecha
     return;
   }      
