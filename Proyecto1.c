@@ -27,8 +27,7 @@ int main()                                    // Main function
       girarIzquierda();
     }
     if(consultarDerecha()==0&&consultarIzquierda()==0){//camino cerrado
-      girarDerecha();
-      girarDerecha();
+      girar180();
     }
     
     
@@ -49,7 +48,7 @@ void girarIzquierda(){
   }  
 }
 void girarDerecha(){
-   for(int n = 1; n <= 70; n++){                // Count to hundred
+   for(int n = 1; n <= 100; n++){                // Count to hundred
     drive_rampStep(20,20);                   // move not too fast
     pause(10);                               // 50 ms between reps
   } 
@@ -64,7 +63,7 @@ void girarDerecha(){
     pause(500);
     drive_goto(24,-24); //giro a la derecha
     pause(500);
-    for(int n = 1; n <= 70; n++){                // Count to hundred
+    for(int n = 1; n <= 100; n++){                // Count to hundred
     drive_rampStep(20,20);                   // move not too fast
     pause(10);                               // 50 ms between reps
   } 
@@ -72,6 +71,24 @@ void girarDerecha(){
     return;
   }      
 }
+
+
+
+void girar180(){
+    drive_speed(0,0);
+    pause(500);
+    drive_goto(24,-24); //giro a la derecha
+    pause(500);
+    drive_goto(24,-24); //giro a la derecha
+    pause(500);                               // 50 ms between reps
+    // avanza hasta que se encuentra denuevo con una pared a la derecha
+    return;
+       
+}
+
+
+
+
 int v_adelante(){
   return ping_cm(8);
 }
@@ -80,7 +97,7 @@ int v_adelante(){
 //Retorna 1 cuando no hay objeto
 //Retorna 0 cuando hay objeto
 int consultarDerecha(){
-  freqout(1,1,38000);
+  freqout(1,1,27000);
   return (input(2));
   }
 
@@ -88,6 +105,6 @@ int consultarDerecha(){
 //Retorna 1 cuando no hay objeto
 //Retorna 0 cuando hay objeto
 int consultarIzquierda(){
-  freqout(11,1,38000);
+  freqout(11,1,27000);
   return (input(10));
   }
